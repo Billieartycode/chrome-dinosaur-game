@@ -10,11 +10,11 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	
+	# to turn start ON 
 	if Input.is_action_just_pressed("ui_select"):
 		start =true
 
-	# Add the gravity.
+	#game animations
 	if start == true :
 		$"dino animation".play("run")
 	else :
@@ -28,22 +28,14 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		
 		velocity.y = JUMP_VELOCITY
-		#$"dino animation".play("jump")
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	#var direction := Input.get_axis("ui_left", "ui_right")
-	#if direction:
-	#	velocity.x = direction * SPEED
-	#else:
-	#	velocity.x = move_toward(velocity.x, 0, SPEED)
-
+		
 	move_and_slide()
-
+	
+#to define the body with this func
 func dino():
 	pass
 
-
+#to play die animation
 func _on_dino_body_body_entered(body: Node2D) -> void:
-	#if body.has_method("cactus"):
-	$"dino animation".play("outch")
+	if body.has_method("cactus"):
+		$"dino animation".play("outch")
